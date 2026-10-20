@@ -63,3 +63,21 @@ For each indicator, rows should represent chronological observations. If no time
 The machine-learning models are global: one estimator is fit on pooled rows from all indicators. Inputs include recent lags scaled using training-period statistics and categorical indicator identity/type. The prediction target is the next reading's change from the latest observed value, scaled per indicator. Recursive forecasts feed each prediction into the next forecast step.
 
 The app evaluates models on a chronological holdout using one-step predictions whose lag features use prior observed readings. This is not the same as multi-step recursive forecast validation. Treat recommendations as provisional, especially with small datasets. Forecast values are not alarms, equipment-health determinations, or safety guidance.
+
+
+## If "OpenBLAS error: Memory allocation still failed after 10 retries, giving up." comes up:
+For CMD:
+```bash
+set OPENBLAS_NUM_THREADS=1
+set OMP_NUM_THREADS=1
+set MKL_NUM_THREADS=1
+streamlit run app.py
+```
+
+For Powershell:
+```bash
+$env:OPENBLAS_NUM_THREADS="1"
+$env:OMP_NUM_THREADS="1"
+$env:MKL_NUM_THREADS="1"
+streamlit run app.py
+```
